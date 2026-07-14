@@ -3,7 +3,6 @@
     "framework": null,
 
     "buildCommand": "npm run build",
-    "outputDirectory": "public",
 
     "functions": {
         "api/index.php": {
@@ -23,6 +22,7 @@
     ],
 
     "env": {
+        "APP_NAME": "Portal",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://kpn-portal-1usj0sabx-da-team-corp.vercel.app",
