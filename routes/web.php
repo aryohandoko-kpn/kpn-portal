@@ -6,10 +6,16 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LandingController;
-
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/', [LandingController::class, 'index'])
+    ->name('landing');
+
+Route::get('/production', [LandingController::class, 'production'])
+    ->name('landing.production');
+
+Route::get('/development', [LandingController::class, 'development'])
+    ->name('landing.development');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -180,7 +180,7 @@
 
                                             <a href="{{ route('applications.show', $app) }}"
                                                 class="rounded-lg border border-slate-200 p-2 hover:bg-slate-100">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                <svg class="w-6 h-6 text-gray-800" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                                     viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-width="2"
@@ -193,7 +193,7 @@
 
                                             <a href="{{ route('admin.applications.edit', $app) }}"
                                                 class="rounded-lg border border-blue-200 bg-blue-50 p-2 hover:bg-blue-100">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                <svg class="w-6 h-6 text-gray-800" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                                     viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round"
@@ -207,7 +207,7 @@
                                                 x-on:click="$dispatch('open-modal','confirm-delete-{{ $app->id }}')"
                                                 class="rounded-lg border border-red-200 bg-red-50 p-2 hover:bg-red-100">
 
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                <svg class="w-6 h-6 text-gray-800" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                                     viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round"

@@ -1,4 +1,3 @@
-{{-- resources/views/components/sidebar-link.blade.php --}}
 @props(['href' => '#', 'active' => false, 'icon' => null])
 
 <a href="{{ $href }}" {{ $attributes->class([
