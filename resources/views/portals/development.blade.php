@@ -1,236 +1,137 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('welcome.landing')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('page_title', 'Development Portal')
 
-    <title>Development Portal - {{ config('app.name') }}</title>
+@section('content')
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+    <div class="mb-8 flex items-center justify-between">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+        <div>
 
-<body class="relative overflow-x-hidden bg-slate-50 font-sans antialiased text-slate-800">
+            <h2 class="text-3xl font-bold text-slate-900">
+                Development Applications
+            </h2>
 
-    {{-- Background --}}
-    <div class="fixed inset-0 -z-10 overflow-hidden">
+            <p class="mt-2 text-slate-600">
+                {{ $applications->count() }} application{{ $applications->count() != 1 ? 's' : '' }} available in
+                Development.
+            </p>
 
-        {{-- Gradient --}}
-        <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-indigo-50 to-blue-50"></div>
-
-        {{-- Grid --}}
-        <div class="absolute inset-0 opacity-[0.035]" style="
-                background-image:
-                    linear-gradient(rgb(15 23 42) 1px, transparent 1px),
-                    linear-gradient(90deg, rgb(15 23 42) 1px, transparent 1px);
-                background-size:48px 48px;">
         </div>
-
-        {{-- Blur --}}
-        <div class="absolute -top-44 -left-44 h-[36rem] w-[36rem] rounded-full bg-indigo-400/20 blur-3xl"></div>
-
-        <div class="absolute top-1/3 -right-40 h-[30rem] w-[30rem] rounded-full bg-blue-400/15 blur-3xl"></div>
-
-        <div class="absolute bottom-0 left-1/4 h-[28rem] w-[28rem] rounded-full bg-cyan-400/15 blur-3xl"></div>
 
     </div>
 
-    <div class="min-h-screen flex flex-col">
+    @if ($applications->isEmpty())
 
-        <main class="flex-1">
+        <div class="rounded-3xl border border-dashed border-slate-300 bg-white py-20 text-center">
 
-            <div class="max-w-7xl mx-auto px-6 py-12">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-14 w-14 text-slate-400" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
 
-                {{-- Hero --}}
-                <div
-                    class="relative overflow-hidden rounded-3xl border border-white/60 bg-white/70 p-10 shadow-sm backdrop-blur-xl">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L15 12l-5.25-5" />
 
-                    <div class="absolute top-0 right-0 h-60 w-60 rounded-full bg-indigo-100 blur-3xl opacity-70">
-                    </div>
+            </svg>
 
-                    <div class="relative">
+            <h3 class="mt-4 text-lg font-semibold text-slate-700">
+                No Applications Found
+            </h3>
 
-                        <span
-                            class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700">
+            <p class="mt-2 text-slate-500">
+                There are currently no development applications available.
+            </p>
 
-                            Development Environment
+        </div>
 
-                        </span>
+    @else
 
-                        <h1 class="mt-5 text-4xl font-bold tracking-tight text-slate-900">
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
 
-                            Development Application Portal
+            @foreach ($applications as $app)
 
-                        </h1>
+                <a href="{{ $app->url }}" target="_blank"
+                    class="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl">
 
-                        <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+                    <div class="flex items-start justify-between">
 
-                            Access development, sandbox, QA and UAT applications
-                            for testing, implementation and validation before
-                            deployment to Production.
+                        <div class="flex items-center gap-4">
 
-                        </p>
+                            @if($app->icon)
 
-                        <div class="mt-8 flex flex-wrap gap-3">
+                                <img src="{{ Storage::url($app->icon) }}" class="h-14 w-14 rounded-xl object-cover">
 
-                            <span
-                                class="rounded-full border border-indigo-200 bg-white px-4 py-2 text-sm text-slate-700">
+                            @else
 
-                                Development
+                                <div
+                                    class="flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100 text-xl font-bold text-blue-700">
 
-                            </span>
+                                    {{ strtoupper(substr($app->name, 0, 1)) }}
 
-                            <span
-                                class="rounded-full border border-indigo-200 bg-white px-4 py-2 text-sm text-slate-700">
+                                </div>
 
-                                QA
+                            @endif
 
-                            </span>
+                            <div>
 
-                            <span
-                                class="rounded-full border border-indigo-200 bg-white px-4 py-2 text-sm text-slate-700">
+                                <h3 class="font-semibold text-slate-900">
 
-                                UAT
+                                    {{ $app->name }}
 
-                            </span>
+                                </h3>
 
-                            <span
-                                class="rounded-full border border-indigo-200 bg-white px-4 py-2 text-sm text-slate-700">
+                                <p class="text-sm text-slate-500">
 
-                                Sandbox
+                                    {{ $app->category?->name }}
 
-                            </span>
+                                </p>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                        @php
+                            $statusColor = match ($app->status) {
+                                'maintenance' => 'bg-yellow-100 text-yellow-700',
+                                'inactive' => 'bg-red-100 text-red-700',
+                                default => 'bg-blue-100 text-blue-700',
+                            };
+                        @endphp
 
-                </div>
+                        <span class="rounded-full px-3 py-1 text-xs font-semibold {{ $statusColor }}">
 
-                {{-- Header --}}
-                <div class="mt-10 mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                            {{ ucfirst($app->status) }}
 
-                    <div>
-
-                        <h2 class="text-2xl font-bold text-slate-900">
-
-                            Available Applications
-
-                        </h2>
-
-                        <p class="mt-2 text-sm text-slate-500">
-
-                            {{ $applications->count() }}
-                            application{{ $applications->count() > 1 ? 's' : '' }}
-                            available in Development.
-
-                        </p>
+                        </span>
 
                     </div>
 
-                    <div class="flex items-center gap-3">
+                    <p class="mt-5 line-clamp-3 text-sm leading-6 text-slate-600">
 
-                        <a href="{{ route('landing') }}"
-                            class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-100">
+                        {{ $app->description }}
 
-                            ← Back
+                    </p>
 
-                        </a>
+                    <div class="mt-6 flex items-center justify-between">
 
-                        @auth
+                        <span class="text-sm text-slate-500">
 
-                            <a href="{{ route('applications.index') }}"
-                                class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700">
+                            {{ $app->department }}
 
-                                Manage Applications
+                        </span>
 
-                            </a>
+                        <span class="font-semibold text-blue-600 transition group-hover:translate-x-1">
 
-                        @endauth
+                            Open →
 
-                    </div>
-
-                </div>
-                {{-- Applications --}}
-                @if ($applications->isEmpty())
-
-                    <div
-                        class="rounded-3xl border border-dashed border-slate-300 bg-white/70 py-24 text-center backdrop-blur">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-5 h-14 w-14 text-slate-300" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10" />
-
-                        </svg>
-
-                        <h3 class="text-xl font-semibold text-slate-700">
-                            No Development Applications
-                        </h3>
-
-                        <p class="mt-2 text-slate-500">
-                            There are currently no applications available in the
-                            Development environment.
-                        </p>
+                        </span>
 
                     </div>
 
-                @else
+                </a>
 
-                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            @endforeach
 
-                        @foreach ($applications as $app)
+        </div>
 
-                            <x-application-card :icon="$app->icon ? Storage::url($app->icon) : null" :name="$app->name"
-                                :description="$app->description" :category="$app->category?->name"
-                                :department="$app->department" :environment="$app->environment" :status="$app->status"
-                                :url="$app->url" />
+    @endif
 
-                        @endforeach
-
-                    </div>
-
-                @endif
-
-            </div>
-
-        </main>
-
-        {{-- Footer --}}
-        <footer class="border-t border-slate-200/70 bg-white/50 backdrop-blur">
-
-            <div
-                class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-sm text-slate-500 md:flex-row">
-
-                <div>
-                    © {{ date('Y') }}
-                    {{ config('app.name') }}.
-                    All rights reserved.
-                </div>
-
-                <div class="flex items-center gap-5">
-
-                    <span class="inline-flex items-center gap-2">
-
-                        <span class="h-2 w-2 rounded-full bg-indigo-500"></span>
-
-                        Development Environment
-
-                    </span>
-
-                </div>
-
-            </div>
-
-        </footer>
-
-    </div>
-
-    <x-floating-login-button />
-
-</body>
-
-</html>
+@endsection

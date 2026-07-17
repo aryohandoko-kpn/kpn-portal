@@ -8,8 +8,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LandingController::class, 'index'])
-    ->name('landing');
+Route::get('/', function () {
+    return redirect()->route('landing.production');
+});
 
 Route::get('/production', [LandingController::class, 'production'])
     ->name('landing.production');

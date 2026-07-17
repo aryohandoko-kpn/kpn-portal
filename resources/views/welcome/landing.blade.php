@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Digital Application Portal') }}</title>
+    <title>@yield('page_title', config('app.name', 'Digital Application Portal'))</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
@@ -37,157 +37,58 @@
 
     <div class="min-h-screen">
 
-        <div class="mx-auto flex min-h-screen max-w-7xl items-center px-6 py-16">
+        <div class="mx-auto max-w-7xl px-6 py-16">
 
-            <div class="w-full">
+            {{-- Hero --}}
+            <div class="mx-auto max-w-4xl text-center">
 
-                {{-- Hero --}}
-                <div class="mx-auto max-w-4xl text-center">
+                <span
+                    class="inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-blue-700">
+                    Enterprise Portal
+                </span>
 
-                    <span
-                        class="inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-blue-700">
-                        Enterprise Portal
-                    </span>
+                <h1 class="mt-6 text-5xl font-bold tracking-tight text-slate-900">
+                    Digital Application Portal
+                </h1>
 
-                    <h1 class="mt-6 text-5xl font-bold tracking-tight text-slate-900">
-                        Digital Application Portal
-                    </h1>
+                <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+                    Access all enterprise applications from a centralized portal.
+                    Choose the environment below to access available systems.
+                </p>
 
-                    <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                        Access all enterprise applications from a centralized portal.
-                        Choose the environment you want to access and start working
-                        securely from a single place.
-                    </p>
+            </div>
 
-                </div>
+            {{-- Navigation Tabs --}}
+            <div class="mt-14 flex justify-center">
 
-                {{-- Portal Cards --}}
-                <div class="mt-16 grid gap-8 lg:grid-cols-2">
+                <div class="inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-sm">
 
-                    {{-- Production --}}
-                    <a href="{{ route('landing.production') }}"
-                        class="group relative overflow-hidden rounded-3xl border border-emerald-100 bg-white/80 p-8 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-emerald-300 hover:shadow-2xl">
+                    <a href="{{ route('landing.production') }}" class="rounded-xl px-6 py-3 text-sm font-semibold transition
+                        {{ request()->routeIs('landing.production')
+    ? 'bg-emerald-600 text-white shadow'
+    : 'text-slate-600 hover:bg-slate-100' }}">
 
-                        <div
-                            class="absolute right-0 top-0 h-44 w-44 rounded-full bg-emerald-100 blur-3xl opacity-60 transition group-hover:opacity-90">
-                        </div>
-
-                        <div class="relative">
-
-                            <div
-                                class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-
-                                </svg>
-
-                            </div>
-
-                            <h2 class="text-3xl font-bold text-slate-900">
-                                Production
-                            </h2>
-
-                            <p class="mt-4 text-slate-600 leading-7">
-                                Live enterprise applications used by employees for
-                                daily operational and business activities.
-                            </p>
-
-                            <ul class="mt-8 space-y-3 text-sm text-slate-600">
-
-                                <li>✔ Live Systems</li>
-
-                                <li>✔ Business Applications</li>
-
-                                <li>✔ Operational Services</li>
-
-                                <li>✔ Enterprise Platform</li>
-
-                            </ul>
-
-                            <div class="mt-10 inline-flex items-center gap-2 font-semibold text-emerald-700">
-
-                                Open Production Portal
-
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-
-                                </svg>
-
-                            </div>
-
-                        </div>
+                        Production
 
                     </a>
 
-                    {{-- Development --}}
-                    <a href="{{ route('landing.development') }}"
-                        class="group relative overflow-hidden rounded-3xl border border-blue-100 bg-white/80 p-8 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-2xl">
+                    <a href="{{ route('landing.development') }}" class="rounded-xl px-6 py-3 text-sm font-semibold transition
+                        {{ request()->routeIs('landing.development')
+    ? 'bg-blue-600 text-white shadow'
+    : 'text-slate-600 hover:bg-slate-100' }}">
 
-                        <div
-                            class="absolute right-0 top-0 h-44 w-44 rounded-full bg-blue-100 blur-3xl opacity-60 transition group-hover:opacity-90">
-                        </div>
-
-                        <div class="relative">
-
-                            <div
-                                class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-
-                                </svg>
-
-                            </div>
-
-                            <h2 class="text-3xl font-bold text-slate-900">
-                                Development
-                            </h2>
-
-                            <p class="mt-4 text-slate-600 leading-7">
-                                Sandbox, QA, UAT, staging and development
-                                applications for testing and implementation.
-                            </p>
-
-                            <ul class="mt-8 space-y-3 text-sm text-slate-600">
-
-                                <li>✔ Development Server</li>
-
-                                <li>✔ QA Environment</li>
-
-                                <li>✔ UAT Environment</li>
-
-                                <li>✔ Sandbox Systems</li>
-
-                            </ul>
-
-                            <div class="mt-10 inline-flex items-center gap-2 font-semibold text-blue-700">
-
-                                Open Development Portal
-
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-
-                                </svg>
-
-                            </div>
-
-                        </div>
+                        Development
 
                     </a>
 
                 </div>
+
+            </div>
+
+            {{-- Content --}}
+            <div class="mt-12">
+
+                @yield('content')
 
             </div>
 
