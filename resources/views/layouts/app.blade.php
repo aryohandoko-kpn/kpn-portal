@@ -40,16 +40,6 @@
                     </div>
                 </div>
 
-                {{-- Notifications --}}
-                <button type="button" class="relative text-slate-400 hover:text-slate-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.8">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
-                    <span class="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-red-500"></span>
-                </button>
-
                 {{-- Profile dropdown (reuse Breeze's x-dropdown) --}}
                 <x-dropdown width="48">
                     <x-slot name="trigger">
@@ -82,9 +72,9 @@
 
             {{-- Page Heading (breadcrumb-style) --}}
             @isset($header)
-                <div class="bg-white border-b border-slate-100 px-4 sm:px-6 py-4">
-                    {{ $header }}
-                </div>
+            <div class="bg-white border-b border-slate-100 px-4 sm:px-6 py-4">
+                {{ $header }}
+            </div>
             @endisset
 
             {{-- Page Content --}}
