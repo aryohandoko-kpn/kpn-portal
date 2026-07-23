@@ -24,7 +24,6 @@ class StoreApplicationRequest extends FormRequest
             'url' => ['required', 'url', 'max:255'],
             'environment' => ['required', 'in:Production,Staging,Development'],
             'status' => ['required', 'in:active,inactive,maintenance'],
-            'display_order' => ['nullable', 'integer', 'min:0'],
             'icon' => ['nullable', 'image', 'max:5024'],
             'is_active' => ['boolean'],
         ];

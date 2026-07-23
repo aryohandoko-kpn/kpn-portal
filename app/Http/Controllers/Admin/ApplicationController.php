@@ -41,6 +41,9 @@ class ApplicationController extends Controller
     {
         $data = $request->validated();
 
+        // Hitung display_order otomatis (urutan berikutnya)
+        $data['display_order'] = (Application::max('display_order') ?? 0) + 1;
+
         if ($request->hasFile('icon')) {
             $data['icon'] = $request->file('icon')->store('application-icons', 'public');
         }
