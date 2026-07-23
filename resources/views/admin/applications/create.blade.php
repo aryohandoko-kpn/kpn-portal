@@ -117,7 +117,7 @@
                             <div>
                                 <x-input-label for="display_order" value="Display Order" />
                                 <x-text-input id="display_order" name="display_order" type="number" class="mt-1 block w-full"
-                                              value="{{ old('display_order', 0) }}" min="0" />
+                                    value="{{ old('display_order', 0) }}" min="0" />
                                 <x-input-error :messages="$errors->get('display_order')" class="mt-2" />
                             </div>
 
