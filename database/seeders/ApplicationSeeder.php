@@ -104,11 +104,41 @@ class ApplicationSeeder extends Seeder
                 'is_active' => true,
             ],
 
+            [
+                'name' => 'Compass System',
+                'code' => 'CS',
+                'description' => 'Maintain Compass System',
+                'category_id' => $categoryErp?->id,
+                'department' => 'Digital Application',
+                'owner' => 'Digital Application',
+                'url' => 'https://compass.gamasap.com/',
+                'environment' => 'Production',
+                'status' => 'active',
+                'display_order' => 12,
+                'icon' => null,
+                'is_active' => true,
+            ],
+
+            [
+                'name' => 'E-Log System',
+                'code' => 'ELS',
+                'description' => 'Maintain E-Log System',
+                'category_id' => $categoryErp?->id,
+                'department' => 'Digital Application',
+                'owner' => 'Digital Application',
+                'url' => 'http://172.27.7.193/index.php',
+                'environment' => 'Production',
+                'status' => 'active',
+                'display_order' => 14,
+                'icon' => null,
+                'is_active' => true,
+            ],
+
             // DEV
 
             [
                 'name' => 'MeetUp',
-                'code' => 'MU',
+                'code' => 'MUD',
                 'description' => 'Reservation Meeting Room App',
                 'category_id' => $categoryErp?->id,
                 'department' => 'Digital Application',
@@ -123,7 +153,7 @@ class ApplicationSeeder extends Seeder
 
             [
                 'name' => 'Maintenance System',
-                'code' => 'MS',
+                'code' => 'MSD',
                 'description' => 'Maintenance Plant Machine System',
                 'category_id' => $categoryErp?->id,
                 'department' => 'Digital Application',
@@ -138,7 +168,7 @@ class ApplicationSeeder extends Seeder
 
             [
                 'name' => 'Change Request Management',
-                'code' => 'CRM',
+                'code' => 'CRMD',
                 'description' => 'Maintain and Monitoring Change Request',
                 'category_id' => $categoryErp?->id,
                 'department' => 'Digital Application',
@@ -153,7 +183,7 @@ class ApplicationSeeder extends Seeder
 
             [
                 'name' => 'CSR System',
-                'code' => 'CSR',
+                'code' => 'CSRD',
                 'description' => 'Corporate Social Responsibility System',
                 'category_id' => $categoryErp?->id,
                 'department' => 'Digital Application',
@@ -168,7 +198,7 @@ class ApplicationSeeder extends Seeder
 
             [
                 'name' => 'Asset Management System',
-                'code' => 'AMS',
+                'code' => 'AMSD',
                 'description' => 'Maintain Asset System',
                 'category_id' => $categoryErp?->id,
                 'department' => 'Digital Application',
@@ -183,7 +213,7 @@ class ApplicationSeeder extends Seeder
 
             [
                 'name' => 'Logsheet System',
-                'code' => 'LS',
+                'code' => 'LSD',
                 'description' => 'Maintain Logsheet System',
                 'category_id' => $categoryErp?->id,
                 'department' => 'Digital Application',
@@ -192,6 +222,36 @@ class ApplicationSeeder extends Seeder
                 'environment' => 'Development',
                 'status' => 'active',
                 'display_order' => 11,
+                'icon' => null,
+                'is_active' => true,
+            ],
+
+            [
+                'name' => 'Compass System',
+                'code' => 'CSD',
+                'description' => 'Maintain Compass System',
+                'category_id' => $categoryErp?->id,
+                'department' => 'Digital Application',
+                'owner' => 'Digital Application',
+                'url' => 'http://172.30.1.126:8086/',
+                'environment' => 'Development',
+                'status' => 'active',
+                'display_order' => 13,
+                'icon' => null,
+                'is_active' => true,
+            ],
+
+            [
+                'name' => 'E-Log System',
+                'code' => 'ELSD',
+                'description' => 'Maintain E-Log System',
+                'category_id' => $categoryErp?->id,
+                'department' => 'Digital Application',
+                'owner' => 'Digital Application',
+                'url' => 'http://172.27.7.193/dev/index.php',
+                'environment' => 'Development',
+                'status' => 'active',
+                'display_order' => 15,
                 'icon' => null,
                 'is_active' => true,
             ],
