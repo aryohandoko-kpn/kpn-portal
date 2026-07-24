@@ -4,22 +4,44 @@
 
 @section('content')
 
-    <div class="mb-8 flex items-center justify-between">
+    <div class="mb-8">
 
-        <div>
+        <h2 class="text-3xl font-bold text-slate-900">
+            Production Applications
+        </h2>
 
-            <h2 class="text-3xl font-bold text-slate-900">
-                Production Applications
-            </h2>
-
-            <p class="mt-2 text-slate-600">
-                {{ $applications->count() }} application{{ $applications->count() != 1 ? 's' : '' }} available in
-                Production.
-            </p>
-
-        </div>
+        <p class="mt-2 text-slate-600">
+            {{ $applications->total() }} application{{ $applications->total() != 1 ? 's' : '' }} available in
+            Production.
+        </p>
 
     </div>
+
+    <div class="mb-10 max-w-full">
+        <x-search-bar placeholder="Cari aplikasi production..." theme="emerald" />
+    </div>
+
+    @if ($categories->isNotEmpty())
+        <div class="mb-10 flex flex-wrap gap-2">
+
+            <a href="{{ request()->fullUrlWithQuery(['category_id' => null]) }}" class="rounded-full px-4 py-1.5 text-sm font-medium transition
+                                               {{ !request('category_id')
+                ? 'bg-emerald-600 text-white shadow'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100' }}">
+                Semua Kategori
+            </a>
+
+            @foreach($categories as $category)
+                <a href="{{ request()->fullUrlWithQuery(['category_id' => $category->id]) }}" class="rounded-full px-4 py-1.5 text-sm font-medium transition
+                                                               {{ (int) request('category_id') === $category->id
+                        ? 'bg-emerald-600 text-white shadow'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100' }}">
+                    {{ $category->name }}
+                </a>
+            @endforeach
+
+        </div>
+    @endif
 
     @if ($applications->isEmpty())
 
@@ -37,7 +59,11 @@
             </h3>
 
             <p class="mt-2 text-slate-500">
-                There are currently no production applications available.
+                @if(request('search'))
+                    No results found for "<span class="font-semibold">{{ request('search') }}</span>".
+                @else
+                    There are currently no production applications available.
+                @endif
             </p>
 
         </div>
@@ -122,6 +148,10 @@
 
             @endforeach
 
+        </div>
+
+        <div class="mt-10">
+            {{ $applications->links() }}
         </div>
 
     @endif
